@@ -6,3 +6,7 @@ You need to have Vesper Extension installed on your VSCode for this to work. Thi
 
 Vesper Theme GitHub:
 [https://github.com/raunofreiberg/vesper]
+
+Example image:
+
+![](Vesper_Sample.png)
