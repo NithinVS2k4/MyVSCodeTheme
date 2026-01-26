@@ -1,24 +1,14 @@
 {
-    "code-runner.runInTerminal": true,
-    "python.analysis.languageServerMode": "full",
-    "python.languageServer": "Pylance",
-    "python.analysis.indexing": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "editor.formatOnSave": true,
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    },
-    "editor.bracketPairColorization.enabled": true,
     "workbench.colorTheme": "Vesper",
-    "notebook.cellToolbarVisibility": "hover",
+    "editor.bracketPairColorization.enabled": true,
     "workbench.colorCustomizations": {
         "[Vesper]": {
-            "editorBracketHighlight.foreground1": "#A0A0A0", // Light Grey
-            "editorBracketHighlight.foreground2": "#7a7a7a", // Darker Grey
-            "editorBracketHighlight.foreground3": "#A0A0A0", // Light Grey
-            "editorBracketHighlight.foreground4": "#7a7a7a", // Darker Grey
-            "editorBracketHighlight.foreground5": "#A0A0A0", // Light Grey
-            "editorBracketHighlight.foreground6": "#7a7a7a", // Darker Grey
+            "editorBracketHighlight.foreground1": "#A0A0A0",
+            "editorBracketHighlight.foreground2": "#7a7a7a",
+            "editorBracketHighlight.foreground3": "#A0A0A0",
+            "editorBracketHighlight.foreground4": "#7a7a7a",
+            "editorBracketHighlight.foreground5": "#A0A0A0",
+            "editorBracketHighlight.foreground6": "#7a7a7a"
         }
     },
     "editor.tokenColorCustomizations": {
@@ -33,18 +23,18 @@
                     ],
                     "settings": {
                         "foreground": "#bfbfbf"
-                    },
+                    }
                 },
                 {
                     "scope": [
                         "keyword.operator.logical.python",
-                        "constant.language.python",
+                        "constant.language.python"
                     ],
                     "settings": {
-                        "foreground": "#7cabde" // Match your keyword color
+                        "foreground": "#7cabde"
                     }
                 }
             ]
         }
-    },
+    }
 }
