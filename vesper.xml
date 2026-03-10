@@ -1,1 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Vesper (Custom) — GtkSourceView / gedit style scheme
+  ======================================================
+  Based on the Vesper VSCode theme by Rauno Freiberg
+  https://github.com/raunofreiberg/vesper
 
+  User modifications applied on top:
+    - strings:                    #6dd9ba  (original: #99FFE4)
+    - keywords:                   #7cabde  (original: #A0A0A0)
+    - keyword.operator.logical.*: #7cabde
+    - constant.language.*:        #7cabde  (original: #FFC799)
+    - variable.language.self.*:   #bfbfbf  (original: #A0A0A0)
+
+  Installation:
+    mkdir -p ~/.local/share/gtksourceview-4/styles/
+    cp vesper-custom.xml ~/.local/share/gtksourceview-4/styles/
+
+    For older gedit (GtkSourceView 3):
+    mkdir -p ~/.local/share/gtksourceview-3.0/styles/
+    cp vesper-custom.xml ~/.local/share/gtksourceview-3.0/styles/
+
+  Then: gedit > Preferences > Font & Colors > select "Vesper (Custom)"
+-->
+<style-scheme id="vesper-custom" _name="Vesper (Custom)" version="1.0">
+  <author>Rauno Freiberg (ported with modifications)</author>
+  <description>Dark minimal theme. Strings in mint, keywords in steel blue. Custom port of Vesper for GtkSourceView.</description>
+
+  <!-- ══════════════════════════════════════════════
+       COLOR PALETTE  (sourced directly from theme JSON)
+       ══════════════════════════════════════════════ -->
+
+  <!-- Editor base -->
+  <color name="bg"          value="#101010"/>
+  <color name="fg"          value="#ffffff"/>
+
+  <!-- Core Vesper token colors -->
+  <color name="orange"      value="#FFC799"/>  <!-- functions, classes, numbers, tags, JSON keys -->
+  <color name="red"         value="#FF8080"/>  <!-- errors, invalid, deleted -->
+  <color name="gray"        value="#A0A0A0"/>  <!-- attributes, language vars, operators, misc -->
+
+  <!-- Comment: original is #8b8b8b at ~58% alpha (#8b8b8b94).
+       GtkSourceView 4 supports 8-digit hex (#RRGGBBAA). -->
+  <color name="comment"     value="#8b8b8b94"/>
+
+  <!-- User overrides -->
+  <color name="string"      value="#6dd9ba"/>  <!-- was #99FFE4 -->
+  <color name="keyword"     value="#7cabde"/>  <!-- was #A0A0A0; also used for constant.language and keyword.operator.logical -->
+  <color name="self_var"    value="#bfbfbf"/>  <!-- self/cls; was #A0A0A0 -->
+
+  <!-- Editor chrome colors -->
+  <color name="selection"   value="#ffffff25"/>
+  <color name="gutter_fg"   value="#505050"/>
+  <color name="line_hl"     value="#181818"/>
+  <color name="bracket_hl"  value="#2a2a2a"/>
+  <color name="invisible"   value="#2e2e2e"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       EDITOR CHROME
+       ══════════════════════════════════════════════ -->
+
+  <style name="text"                     foreground="fg"       background="bg"/>
+  <style name="selection"                background="selection"/>
+  <style name="cursor"                   foreground="fg"/>
+  <style name="secondary-cursor"         foreground="self_var"/>
+  <style name="current-line"             background="line_hl"/>
+  <style name="line-numbers"             foreground="gutter_fg" background="bg"/>
+  <style name="current-line-number"      foreground="fg"        background="bg"   bold="true"/>
+  <style name="right-margin"             foreground="invisible" background="invisible"/>
+  <style name="draw-spaces"              foreground="invisible"/>
+  <style name="background-pattern"       background="line_hl"/>
+  <style name="bracket-match"            foreground="fg"        background="bracket_hl" bold="true"/>
+  <style name="bracket-mismatch"         foreground="red"       underline="true"/>
+  <style name="search-match"             foreground="bg"        background="orange"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       DIAGNOSTICS
+       ══════════════════════════════════════════════ -->
+
+  <style name="def:error"                foreground="red"      underline="true"/>
+  <style name="def:warning"              foreground="orange"/>
+  <style name="def:note"                 foreground="keyword"/>
+  <style name="def:net-address"          foreground="string"   underline="true"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       CORE SYNTAX  (def:* — language-agnostic)
+       ══════════════════════════════════════════════ -->
+
+  <!-- Comments — "comment", "punctuation.definition.comment" → #8b8b8b94 -->
+  <style name="def:comment"              foreground="comment"  italic="true"/>
+  <style name="def:shebang"              foreground="comment"  bold="true"/>
+  <style name="def:doc-comment"          foreground="comment"  italic="true"/>
+  <style name="def:doc-comment-element"  foreground="comment"  italic="true"/>
+
+  <!-- Strings — "string", "constant.other.symbol", etc. → user: #6dd9ba -->
+  <style name="def:string"               foreground="string"/>
+  <style name="def:character"            foreground="string"/>
+
+  <!-- Escape / special chars — "constant.character.escape" → #A0A0A0 -->
+  <style name="def:special-char"         foreground="gray"/>
+
+  <!-- Keywords — "keyword", "storage.type", "storage.modifier", "keyword.control"
+       Original: #A0A0A0 — User override: #7cabde -->
+  <style name="def:keyword"              foreground="keyword"/>
+  <style name="def:statement"            foreground="keyword"/>
+  <style name="def:preprocessor"         foreground="keyword"/>
+  <style name="def:reserved"             foreground="keyword"/>
+
+  <!-- Operators — "keyword.operator.logical" → user: #7cabde
+       GtkSourceView has a single def:operator; keyword color covers the user's case. -->
+  <style name="def:operator"             foreground="keyword"/>
+
+  <!-- Types / classes — "entity.name", "support.type", "support.class" → #FFC799 -->
+  <style name="def:type"                 foreground="orange"/>
+  <style name="def:class"                foreground="orange"/>
+
+  <!-- Functions — "entity.name.function", "support.function" → #FFC799 -->
+  <style name="def:function"             foreground="orange"/>
+
+  <!-- Variables — "variable", "meta.block variable.other" → #FFF -->
+  <style name="def:variable"             foreground="fg"/>
+  <style name="def:identifier"           foreground="fg"/>
+
+  <!-- Constants:
+       constant.numeric / constant.character / keyword.other.unit → #FFC799
+       constant.language (True/False/None/null) → user: #7cabde
+       GtkSourceView separates these somewhat; boolean/null → keyword color. -->
+  <style name="def:constant"             foreground="keyword"/>
+  <style name="def:special-constant"     foreground="keyword"/>
+  <style name="def:boolean"              foreground="keyword"/>
+  <style name="def:null-value"           foreground="keyword"/>
+  <style name="def:number"               foreground="orange"/>
+  <style name="def:floating-point"       foreground="orange"/>
+
+  <!-- Built-ins — "support.function", "support.constant" → #FFC799 -->
+  <style name="def:builtin"              foreground="orange"/>
+
+  <!-- Markup / Markdown -->
+  <style name="def:heading"              foreground="orange"   bold="true"/>
+  <style name="def:list-marker"          foreground="keyword"/>
+  <style name="def:emphasis"             italic="true"/>
+  <style name="def:strong-emphasis"      bold="true"/>
+  <style name="def:insertion"            foreground="string"   underline="true"/>
+  <style name="def:deletion"             foreground="red"      strikethrough="true"/>
+  <style name="def:link-text"            foreground="string"/>
+  <style name="def:link-destination"     foreground="gray"     underline="true"/>
+  <style name="def:inline-code"          foreground="gray"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       PYTHON
+       "variable.language.special.self.python"      → user: #bfbfbf
+       "constant.language.python" (True/False/None) → user: #7cabde
+       "keyword.operator.logical.python" (and/or)   → user: #7cabde
+       ══════════════════════════════════════════════ -->
+
+  <style name="python3:special-variable" foreground="self_var"/>
+  <style name="python:special-variable"  foreground="self_var"/>
+  <style name="python3:boolean"          foreground="keyword"/>
+  <style name="python3:special-constant" foreground="keyword"/>
+  <style name="python:boolean"           foreground="keyword"/>
+  <style name="python:special-constant"  foreground="keyword"/>
+  <style name="python3:builtin-function" foreground="orange"/>
+  <style name="python3:builtin-constant" foreground="keyword"/>
+  <style name="python3:decorator"        foreground="orange"/>
+  <style name="python:decorator"         foreground="orange"/>
+  <style name="python3:string-prefix"    foreground="string"/>
+  <style name="python:string-prefix"     foreground="string"/>
+  <style name="python3:format-string"    foreground="string"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       JAVASCRIPT / TYPESCRIPT
+       "variable.language" (this) → #A0A0A0 (original; not self-specific override)
+       "entity.name.module.js"    → #FF8080
+       ══════════════════════════════════════════════ -->
+
+  <style name="js:keyword"               foreground="keyword"/>
+  <style name="js:type"                  foreground="orange"/>
+  <style name="js:string"                foreground="string"/>
+  <style name="js:template-literal"      foreground="string"/>
+  <style name="js:number"                foreground="orange"/>
+  <style name="js:boolean"               foreground="keyword"/>
+  <style name="js:null-value"            foreground="keyword"/>
+  <style name="js:regex"                 foreground="gray"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       CSS / SCSS
+       "source.css support.type.property-name" → #FFF
+       "entity.other.attribute-name"           → #A0A0A0
+       "entity.other.attribute-name.class/id"  → #FFC799
+       ══════════════════════════════════════════════ -->
+
+  <style name="css:property-name"        foreground="fg"/>
+  <style name="css:property-value"       foreground="fg"/>
+  <style name="css:selector-symbol"      foreground="gray"/>
+  <style name="css:at-rule"              foreground="keyword"/>
+  <style name="css:string"               foreground="string"/>
+  <style name="css:color"                foreground="string"/>
+  <style name="css:number"               foreground="orange"/>
+  <style name="css:unit"                 foreground="orange"/>
+  <style name="css:pseudo-selector"      foreground="orange"/>
+  <style name="css:id-selector"          foreground="string"/>
+  <style name="css:class-selector"       foreground="orange"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       HTML / XML
+       "entity.name.tag"                           → #FFC799
+       "entity.other.attribute-name"               → #A0A0A0
+       "text.html.basic entity.other.attribute-name" → #FFC799
+       ══════════════════════════════════════════════ -->
+
+  <style name="xml:element-name"         foreground="orange"/>
+  <style name="xml:attribute-name"       foreground="gray"/>
+  <style name="xml:attribute-value"      foreground="string"/>
+  <style name="xml:comment"              foreground="comment"  italic="true"/>
+  <style name="xml:processing-instruction" foreground="keyword"/>
+  <style name="xml:doctype"              foreground="keyword"/>
+  <style name="html:element-name"        foreground="orange"/>
+  <style name="html:attribute-name"      foreground="orange"/>
+  <style name="html:attribute-value"     foreground="string"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       JSON
+       All JSON key levels → #FFC799
+       ══════════════════════════════════════════════ -->
+
+  <style name="json:keyname"             foreground="orange"/>
+  <style name="json:string-value"        foreground="string"/>
+  <style name="json:number"              foreground="orange"/>
+  <style name="json:boolean"             foreground="keyword"/>
+  <style name="json:null-value"          foreground="keyword"/>
+  <style name="json:special-char"        foreground="gray"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       SHELL
+       ══════════════════════════════════════════════ -->
+
+  <style name="sh:keyword"               foreground="keyword"/>
+  <style name="sh:variable"              foreground="fg"/>
+  <style name="sh:string"                foreground="string"/>
+  <style name="sh:function"              foreground="orange"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       RUST
+       ══════════════════════════════════════════════ -->
+
+  <style name="rust:lifetime"            foreground="orange"/>
+  <style name="rust:macro"               foreground="orange"/>
+  <style name="rust:type"                foreground="orange"/>
+  <style name="rust:string"              foreground="string"/>
+  <style name="rust:boolean"             foreground="keyword"/>
+
+
+  <!-- ══════════════════════════════════════════════
+       DIFF / VCS
+       "markup.inserted" → #99FFE4 (string green family)
+       "markup.deleted"  → #FF8080
+       "markup.changed"  → #A0A0A0
+       ══════════════════════════════════════════════ -->
+
+  <style name="diff:added-line"          foreground="string"/>
+  <style name="diff:removed-line"        foreground="red"/>
+  <style name="diff:changed-line"        foreground="gray"/>
+  <style name="diff:location"            foreground="orange"/>
+  <style name="diff:diff-file"           foreground="fg"       bold="true"/>
+
+</style-scheme>
